@@ -1,0 +1,39 @@
+<% include partials/header %>
+
+
+
+<div class='container'>
+	<header class='jumbotron'>
+		<div class="container">
+			<h1>
+			Welcome to Yelpcam!
+			</h1>
+			<p>
+				<a class='btn btn-success btn-large' href='/campgrounds/new'>Add new campground</a>
+			</p>
+		</div>
+		
+		
+	</header>
+
+	<div class='row text-center' style="display:flex; flex-wrap:wrap;">
+		<%campgrounds.forEach(function(camp){%>
+
+		<div class='col-md-3 col-sm-6'>
+			<div class='thumbnail'>
+				<img src="<%=camp.image%>">
+				<div class='caption'>
+					<%= camp.name %>
+				</div>
+				<p>
+					<a class="btn btn-sm btn-primary" href="/campgrounds/<%= camp._id %>">More Info</a>
+				</p>
+			</div>
+			
+		</div>
+
+		<% }); %>
+	</div>
+	
+</div>
+<% include partials/footer %>

@@ -1,0 +1,68 @@
+<% include partials/header %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">Yelpcam</p>
+			<div class="list-group">
+				<li class="list-group-item active">Info1</li>
+				<li class="list-group-item">Info2</li>
+				<li class="list-group-item">Info3</li>
+				
+			</div>
+		</div>
+			<div class="col-md-9">
+				<div class="thumbnail">
+					<img class="img-responsive" style="width:100%" src="<%=foundcampground.image %>">
+					<div class="caption-full">
+						<h4 class="pull-right">$9/night</h4>
+						<h4>
+							<%= foundcampground.name %>
+						</h4>
+						
+						<p>
+							<%=foundcampground.description %>
+						</p>
+						<% if(currentUser&&currentUser._id.equals(foundcampground.author.id)){%>
+							<a class="btn btn-xs btn-warning" href="/campgrounds/<%=foundcampground._id %>/edit">Edit</a>
+						
+						<form action="/campgrounds/<%=foundcampground._id%>?_method=DELETE" method="POST" style="display:inline">
+							<button class="btn btn-xs btn-danger">
+								Delete
+							</button>
+						</form>
+						<%}%>
+						
+					</div>
+				</div>
+				<div class="well">
+					<div class="text-right">
+						<a class="btn btn-success" href="/campgrounds/<%=foundcampground._id%>/comment/new">Leave a Review</a>
+					</div>
+					<hr>
+					<% foundcampground.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<strong><%=comment.author.username %></strong>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<%=comment.text%>
+						</div>
+						<% if(currentUser && currentUser._id.equals(comment.author.id)) {%>
+							<a class="btn btn-xs btn-warning" 
+						   href="/campgrounds/<%=foundcampground._id%>/comment/<%=comment._id%>/edit">Edit</a>
+						
+						<%}%>
+						
+					</div>
+					<% }) %>
+				</div>
+			</div>
+		
+	</div>
+</div>
+
+
+
+<% include partials/footer %>
