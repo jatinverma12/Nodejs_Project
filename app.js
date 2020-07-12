@@ -51,7 +51,7 @@ app.get("/",function(req,res){
 
 
 ///INDEX
-app.get('/campgrounds',isLoggedIn,function(req,res){
+app.get('/campgrounds',function(req,res){
 	Campground.find({},function(err,allcampgrounds){
 		if(err){
 			console.log("error");
