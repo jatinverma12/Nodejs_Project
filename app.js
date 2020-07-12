@@ -229,7 +229,7 @@ app.post("/login",passport.authenticate("local",{
 //LOGOUT ROUTE
 app.get("/logout",function(req,res){
 	req.logout();
-	res.redirect("/");
+	res.redirect("/campgrounds");
 });
 
 //MIDDLEWARE
