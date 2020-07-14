@@ -207,12 +207,13 @@ app.post("/register",function(req,res){
 	var newUser=new User({username:req.body.username});
 	User.register(newUser,req.body.password,function(err,user){
 		if(err){
-			console.log("fuck u");
-		}else{
-			passport.authenticate("local")(req,res,function(){
-				res.redirect("/campgrounds");
-			});
-		}
+            req.flash("error", err.message);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+           req.flash("success", "Welcome to YelpCamp " + user.username);
+           res.redirect("/campgrounds"); 
+        });
 	});
 });
 //LOGIN ROUTES
